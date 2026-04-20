@@ -1,597 +1,747 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Golu Tiwari | Digital Success Mentor</title>
-    
-    <!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1452191529939930');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1452191529939930&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
-
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golu Tiwari - Digital Entrepreneur & Business Coach</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1452191529939930');
+        fbq('track', 'PageView');
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none" 
+        src="https://www.facebook.com/tr?id=1452191529939930&ev=PageView&noscript=1"/>
+    </noscript>
     <style>
         :root {
-            --accent: #00f2ff;
-            --primary: #6366f1;
-            --whatsapp: #25D366;
-            --bg-base: #0f172a; 
+            --primary: #1a1a2e;
+            --accent: #e94560;
+            --gold: #ffd700;
+            --rose: #f8e1e4;
+            --dark: #0f0f1e;
+            --light: #fafafa;
+            --gradient-1: #16213e;
+            --gradient-2: #0f3460;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        html {
-            scroll-padding-top: 6rem;
         }
 
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg-base);
-            color: #f8fafc;
+            font-family: 'Inter', sans-serif;
+            background: var(--dark);
+            color: #fff;
             overflow-x: hidden;
-            line-height: 1.6;
         }
 
-        #canvas-container {
+        /* Animated Background */
+        .bg-animation {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
-            pointer-events: none;
+            background: linear-gradient(135deg, var(--gradient-1) 0%, var(--gradient-2) 50%, var(--primary) 100%);
         }
 
-        #mouse-flash {
-            position: fixed;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(0, 242, 255, 0.12) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 10;
-            transform: translate(-50%, -50%);
-            mix-blend-mode: screen;
-            transition: opacity 0.4s ease;
-            filter: blur(30px);
-            opacity: 0;
-        }
-
-        .glass {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .glass-hover:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: var(--accent);
-            transform: translateY(-5px);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .text-lightning {
-            background: linear-gradient(to right, #ffffff, var(--accent), var(--primary), #ffffff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-size: 200% auto;
-            animation: shine 4s linear infinite;
-        }
-
-        @keyframes shine {
-            to { background-position: 200% center; }
-        }
-
-        .cta-button {
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            border: none;
-            color: white;
-            font-weight: 800;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .cta-button:hover {
-            box-shadow: 0 10px 40px rgba(0, 242, 255, 0.4);
-            transform: scale(1.05);
-        }
-
-        .whatsapp-float {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            width: 60px;
-            height: 60px;
-            background: var(--whatsapp);
-            color: white;
-            border-radius: 50%;
-            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
-            z-index: 50; 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            animation: pulse-green 2.5s infinite;
-        }
-
-        @keyframes pulse-green {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-        }
-
-        #join-modal {
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-            z-index: 2000;
-        }
-
-        .modal-content {
-            transform: scale(0.9);
-            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        #join-modal.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        #join-modal.active .modal-content {
-            transform: scale(1);
-        }
-
-        .img-bw-effect {
-            filter: grayscale(100%);
-            transition: filter 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .result-card:hover .img-bw-effect,
-        .group:hover .img-bw-effect {
-            filter: grayscale(0%);
-        }
-
-        input, select { 
-            color: #0f172a;
-            background-color: #f8fafc;
-            border: 1px solid #e2e8f0;
-        }
-        
-        .btn-loading {
-            pointer-events: none;
-            opacity: 0.7;
-        }
-
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%; 
-            height: 0;
-            overflow: hidden;
-            border-radius: 1.5rem;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            background: #000;
-        }
-        .video-wrapper iframe {
+        .bg-animation::before {
+            content: '';
             position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(233,69,96,0.1) 0%, transparent 50%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Floating particles */
+        .particles {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--gold);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 15s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) scale(0); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-100vh) scale(1); opacity: 0; }
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 2rem;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 800px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(255,215,0,0.1);
+            border: 1px solid var(--gold);
+            border-radius: 50px;
+            color: var(--gold);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255,215,0,0.4); }
+            50% { box-shadow: 0 0 0 10px rgba(255,215,0,0); }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .hero-image-container {
+            position: relative;
+            width: 280px;
+            height: 380px;
+            margin: 2rem auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+            border: 3px solid rgba(255,215,0,0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .hero-image-container:hover {
+            transform: scale(1.02);
+        }
+
+        .hero-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-image-container:hover img {
+            transform: scale(1.1);
+        }
+
+        .image-glow {
+            position: absolute;
+            inset: -5px;
+            background: linear-gradient(45deg, var(--accent), var(--gold));
+            border-radius: 25px;
+            z-index: -1;
+            opacity: 0.5;
+            filter: blur(20px);
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { opacity: 0.3; }
+            to { opacity: 0.6; }
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), #ff6b6b);
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(233,69,96,0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(233,69,96,0.4);
+        }
+
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(37,211,102,0.3);
+        }
+
+        .btn-whatsapp:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(37,211,102,0.4);
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 4rem 2rem;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 1;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.08);
+            border-color: var(--gold);
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Earnings Proof Section */
+        .earnings-proof {
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .section-subtitle {
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .proof-container {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .proof-image {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+            border: 2px solid rgba(255,215,0,0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .proof-image:hover {
+            transform: scale(1.02);
+        }
+
+        .proof-badge {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            background: linear-gradient(135deg, var(--gold), #ffed4e);
+            color: var(--dark);
+            padding: 1rem;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(255,215,0,0.3);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* About Section */
+        .about {
+            padding: 4rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 2rem;
+        }
+
+        .highlight {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* Features */
+        .features {
+            padding: 4rem 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            padding: 2rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.08);
+            border-color: var(--accent);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .feature-desc {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(180deg, transparent, rgba(233,69,96,0.1), transparent);
+        }
+
+        .cta h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 1.5rem;
+            color: #fff;
+        }
+
+        .cta p {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            padding: 2rem;
+            text-align: center;
+            color: rgba(255,255,255,0.5);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Scroll animations */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-image-container {
+                width: 220px;
+                height: 300px;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gold);
         }
     </style>
 </head>
 <body>
-
-    <!-- Three.js Background -->
-    <div id="canvas-container"></div>
-    <div id="mouse-flash"></div>
-
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/919236327410?text=Hello%20Golu,%20I%20want%20to%20know%20more%20about%20your%20mentorship!" target="_blank" class="whatsapp-float" id="wa-icon" aria-label="WhatsApp Contact">
-        <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-    </a>
-
-    <!-- Navigation -->
-    <nav class="fixed w-full z-[100] px-4 md:px-6 py-4">
-        <div class="max-w-7xl mx-auto flex justify-between items-center glass rounded-2xl px-6 py-3 shadow-2xl border border-white/10">
-            <div class="flex items-center gap-2">
-                <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center font-bold text-white shadow-lg">G</div>
-                <span class="text-base md:text-xl font-extrabold tracking-tighter uppercase">Golu Tiwari</span>
-            </div>
-            <div class="hidden md:flex gap-8 text-sm font-bold uppercase tracking-widest">
-                <a href="#home" class="hover:text-cyan-400 transition">Home</a>
-                <a href="#video" class="hover:text-cyan-400 transition">Watch</a>
-                <a href="#about" class="hover:text-cyan-400 transition">About</a>
-                <a href="#results" class="hover:text-cyan-400 transition">Stories</a>
-            </div>
-            <button onclick="toggleModal(true)" class="text-[10px] md:text-xs font-black bg-white text-black px-4 md:px-6 py-2 rounded-full hover:bg-cyan-400 transition shadow-lg">Join Now</button>
-        </div>
-    </nav>
+    <div class="bg-animation"></div>
+    <div class="particles" id="particles"></div>
 
     <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex flex-col items-center justify-center px-6 pt-24 text-center relative overflow-hidden">
-        <div class="max-w-4xl mx-auto z-10 w-full">
-            <div class="inline-block py-1 px-4 rounded-full bg-indigo-500/20 border border-indigo-500/40 text-[10px] font-black uppercase tracking-[0.2em] text-indigo-300 mb-8">
-                Elite Digital Mentorship
-            </div>
-            <h1 class="text-4xl md:text-7xl lg:text-8xl font-black mb-8 leading-[1.1] tracking-tighter uppercase">
-                Master Your <br>
-                <span class="text-lightning">Digital Growth</span>
-            </h1>
-            <p class="text-sm md:text-xl text-slate-300 mb-12 max-w-2xl mx-auto leading-relaxed font-medium">
-                Unlock high-income skills with expert guidance. Learn to monetize your smartphone and build a professional digital presence today.
-            </p>
-
-            <!-- Registration Timer -->
-            <div class="glass p-6 md:p-8 rounded-[2rem] max-w-md mx-auto mb-12 flex justify-between items-center shadow-2xl border border-white/5">
-                <div class="text-left pr-4">
-                    <p class="text-[9px] font-bold text-indigo-300 uppercase tracking-widest">Enrollment Open</p>
-                    <h3 class="text-sm md:text-base font-bold text-white uppercase">Seats filling fast</h3>
-                </div>
-                <div class="flex gap-4">
-                    <div class="text-center">
-                        <span id="days" class="text-xl md:text-2xl font-black block">00</span>
-                        <span class="text-[8px] uppercase text-slate-400 font-bold">Days</span>
-                    </div>
-                    <span class="opacity-30 font-bold text-xl">:</span>
-                    <div class="text-center">
-                        <span id="hours" class="text-xl md:text-2xl font-black block">00</span>
-                        <span class="text-[8px] uppercase text-slate-400 font-bold">Hrs</span>
-                    </div>
-                    <span class="opacity-30 font-bold text-xl">:</span>
-                    <div class="text-center">
-                        <span id="minutes" class="text-xl md:text-2xl font-black block">00</span>
-                        <span class="text-[8px] uppercase text-slate-400 font-bold">Min</span>
-                    </div>
-                </div>
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">Digital Entrepreneur</div>
+            <h1>Golu Tiwari</h1>
+            <p class="hero-subtitle">Digital Marketing Expert & Business Coach</p>
+            
+            <div class="hero-image-container">
+                <div class="image-glow"></div>
+                <img src="https://i.ibb.co/mCVcDfgy/Whats-App-Image-2026-04-20-at-5-48-09-PM.jpg" alt="Golu Tiwari">
             </div>
 
-            <div class="flex flex-col sm:flex-row gap-5 justify-center mb-12">
-                <button onclick="toggleModal(true)" class="cta-button px-12 py-5 rounded-2xl text-base md:text-lg uppercase tracking-tight shadow-xl">Connect on WhatsApp</button>
-                <a href="#about" class="glass px-12 py-5 rounded-2xl font-bold hover:bg-white/10 transition border border-white/20">About Golu</a>
-            </div>
-
-            <!-- Badi Image "About Golu" ke theek niche -->
-            <div class="max-w-4xl mx-auto px-2 mb-12">
-                <div class="glass p-2 rounded-[2.5rem] border border-white/10 shadow-2xl overflow-hidden relative group">
-                    <img src="golu.jpg" alt="Banner Image" class="w-full h-auto rounded-[1.8rem] object-cover transition-transform duration-700 group-hover:scale-[1.02]">
-                </div>
+            <div class="btn-group">
+                <a href="https://wa.me/919236327410" class="btn btn-whatsapp" onclick="trackContact()">
+                    <span>📱</span> WhatsApp Now
+                </a>
+                <a href="#contact" class="btn btn-primary" onclick="trackContact()">
+                    <span>🚀</span> Start Your Journey
+                </a>
             </div>
         </div>
     </section>
 
     <!-- Stats Section -->
-    <section class="py-16">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-                <div class="glass p-8 rounded-[2rem] text-center glass-hover transition">
-                    <div class="text-3xl font-black text-white mb-2 uppercase tracking-tighter">1000+</div>
-                    <p class="text-[10px] uppercase font-bold text-slate-400 tracking-widest text-center">Learners</p>
-                </div>
-                <div class="glass p-8 rounded-[2rem] text-center glass-hover transition">
-                    <div class="text-3xl font-black text-indigo-400 mb-2 uppercase tracking-tighter">5+ Yrs</div>
-                    <p class="text-[10px] uppercase font-bold text-slate-400 tracking-widest text-center">Experience</p>
-                </div>
-                <div class="glass p-8 rounded-[2rem] text-center glass-hover transition">
-                    <div class="text-3xl font-black text-white mb-2 uppercase tracking-tighter">98%</div>
-                    <p class="text-[10px] uppercase font-bold text-slate-400 tracking-widest text-center">Success Rate</p>
-                </div>
-                <div class="glass p-8 rounded-[2rem] text-center glass-hover transition">
-                    <div class="text-3xl font-black text-indigo-400 mb-2 uppercase tracking-tighter">24/7</div>
-                    <p class="text-[10px] uppercase font-bold text-slate-400 tracking-widest text-center">Support</p>
-                </div>
+    <section class="stats scroll-reveal">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">₹6.25L+</div>
+                <div class="stat-label">Total Earnings</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">₹25K+</div>
+                <div class="stat-label">Last 7 Days</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">1000+</div>
+                <div class="stat-label">Students Trained</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">Top 1%</div>
+                <div class="stat-label">Affiliate Rank</div>
             </div>
         </div>
     </section>
 
-    <!-- Video Section -->
-    <section id="video" class="py-24 px-6 relative overflow-hidden">
-        <div class="max-w-5xl mx-auto text-center">
-            <div class="mb-16">
-                <span class="text-cyan-400 font-bold uppercase tracking-widest text-xs">Watch Training</span>
-                <h2 class="text-3xl md:text-6xl font-black mt-4 uppercase">How It <span class="text-lightning">Works</span></h2>
-                <p class="text-slate-400 mt-6 max-w-2xl mx-auto leading-relaxed">See how we transform complete beginners into digital entrepreneurs through our training modules.</p>
-            </div>
+    <!-- Earnings Proof -->
+    <section class="earnings-proof scroll-reveal">
+        <h2 class="section-title">Real Results, Real Income</h2>
+        <p class="section-subtitle">Live earning proof from my DigitalPreneur dashboard</p>
+        
+        <div class="proof-container">
+            <div class="proof-badge">Verified<br>Earnings</div>
+            <img src="https://i.ibb.co/N2RDcDbY/golu.jpg" alt="Golu Tiwari Earnings Proof" class="proof-image">
+        </div>
+    </section>
 
-            <div class="glass p-2 md:p-4 rounded-[2.5rem] border border-white/10 max-w-4xl mx-auto shadow-2xl">
-                <div class="video-wrapper">
-                    <iframe src="video.mp4" title="Training Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-            </div>
+    <!-- About -->
+    <section class="about scroll-reveal">
+        <h2 class="section-title">Why Learn From Me?</h2>
+        <p class="about-text">
+            Main <span class="highlight">DigitalPreneur</span> ka top affiliate hun aur <span class="highlight">₹6,25,713+</span> ki lifetime earning kar chuka hun. 
+            Mere students weekly <span class="highlight">₹25,000+</span> kama rahe hain. 
+            Agar aap bhi apni life mein kuch bada karna chahte hain, toh aaj hi mujhse judiye!
+        </p>
+    </section>
 
-            <div class="mt-12 text-center">
-                <button onclick="toggleModal(true)" class="cta-button px-10 py-4 rounded-xl text-base uppercase tracking-wider shadow-2xl">Start My Training</button>
+    <!-- Features -->
+    <section class="features scroll-reveal">
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📚</div>
+                <div class="feature-title">Live Training</div>
+                <div class="feature-desc">Weekly live sessions aur recorded modules ki lifetime access</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <div class="feature-title">1-on-1 Mentorship</div>
+                <div class="feature-desc">Personal guidance aur doubt solving sessions</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <div class="feature-title">High Commission</div>
+                <div class="feature-desc">Upto 90% commission on every successful referral</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <div class="feature-title">Money Back Guarantee</div>
+                <div class="feature-desc">7 din ki money back guarantee, no questions asked</div>
             </div>
         </div>
     </section>
 
-    <!-- Result Showcase -->
-    <section id="results" class="py-24 px-6 bg-slate-900/40">
-        <div class="max-w-7xl mx-auto text-center">
-            <span class="text-cyan-400 font-bold uppercase tracking-widest text-xs">Proven Results</span>
-            <h2 class="text-3xl md:text-6xl font-black mt-4 uppercase">Success <span class="text-lightning">Story</span></h2>
-            
-            <div class="flex justify-center mt-16">
-                <div class="result-card glass p-6 rounded-[3rem] border border-white/10 max-w-sm w-full group">
-                    <div class="aspect-square bg-slate-800 rounded-[2.5rem] overflow-hidden mb-8 relative border border-white/10">
-                        <img src="image.jpeg" alt="Achievement" class="w-full h-full object-cover img-bw-effect">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent"></div>
-                        <div class="absolute bottom-6 left-6 text-left">
-                            <h4 class="text-xl font-black text-white uppercase">Golu Tiwari</h4>
-                            <p class="text-[9px] text-cyan-400 font-black tracking-widest uppercase">Verified Mentor</p>
-                        </div>
-                    </div>
-                    <div class="px-2 pb-4 text-center">
-                        <p class="text-slate-400 text-[10px] font-bold uppercase tracking-[0.2em] mb-2">Total Earned</p>
-                        <div class="text-5xl font-black text-white mb-6 uppercase tracking-tight">6 Lakh</div>
-                        <div class="inline-block bg-indigo-600/10 text-indigo-400 text-[10px] font-black px-5 py-2 rounded-full border border-indigo-500/30 uppercase tracking-widest">
-                            with IDigitalPreneur
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- CTA -->
+    <section class="cta scroll-reveal" id="contact">
+        <h2>Ready to Change Your Life?</h2>
+        <p>Abhi WhatsApp karein aur apni digital journey shuru karein. Limited seats available!</p>
+        <div class="btn-group">
+            <a href="https://wa.me/919236327410" class="btn btn-whatsapp" style="font-size: 1.2rem; padding: 1.2rem 3rem;" onclick="trackContact()">
+                <span>💬</span> Message on WhatsApp
+            </a>
         </div>
+        <p style="margin-top: 2rem; font-size: 1rem; color: var(--gold);">
+            👆 Click karein aur directly WhatsApp par baat karein!
+        </p>
     </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-24 px-6">
-        <div class="max-w-7xl mx-auto">
-            <div class="glass p-8 md:p-16 rounded-[3.5rem] flex flex-col lg:flex-row items-center gap-16 overflow-hidden relative shadow-2xl group">
-                <div class="absolute -right-32 -top-32 w-80 h-80 bg-cyan-500/10 blur-[120px] pointer-events-none"></div>
-                
-                <div class="lg:w-1/2 relative group w-full max-w-md">
-                    <div class="absolute -inset-2 bg-gradient-to-r from-indigo-500 to-cyan-500 rounded-[40px] blur opacity-20 transition duration-1000"></div>
-                    <div class="relative bg-slate-800 rounded-[35px] overflow-hidden aspect-[4/5] border border-white/10 shadow-2xl">
-                        <img src="6lakh.jpeg" alt="Mentor Profile" class="w-full h-full object-cover img-bw-effect">
-                    </div>
-                </div>
-
-                <div class="lg:w-1/2 text-left space-y-10">
-                    <div>
-                        <span class="text-cyan-400 font-extrabold uppercase tracking-[0.3em] text-[10px]">Mentorship Excellence</span>
-                        <h2 class="text-4xl md:text-6xl font-black mt-6 leading-tight uppercase">I am <br><span class="text-lightning">Golu Tiwari</span></h2>
-                    </div>
-                    
-                    <p class="text-lg text-slate-300 leading-relaxed font-medium">
-                        I specialize in guiding ambitious individuals through the digital landscape. My mission is to simplify high-income strategies so anyone can achieve financial freedom through expert mentorship.
-                    </p>
-
-                    <div class="grid grid-cols-1 gap-6 text-left">
-                        <div class="flex items-center gap-6 p-6 rounded-[2rem] bg-white/5 border border-white/10 hover:border-indigo-500/30 transition">
-                            <div class="w-14 h-14 rounded-2xl bg-indigo-500/20 flex items-center justify-center text-indigo-400 flex-shrink-0">
-                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                            </div>
-                            <h4 class="font-bold text-lg text-white uppercase tracking-tight">Direct Education</h4>
-                        </div>
-                        <div class="flex items-center gap-6 p-6 rounded-[2rem] bg-white/5 border border-white/10 hover:border-cyan-500/30 transition">
-                            <div class="w-14 h-14 rounded-2xl bg-cyan-500/20 flex items-center justify-center text-cyan-400 flex-shrink-0">
-                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                            </div>
-                            <h4 class="font-bold text-lg text-white uppercase tracking-tight">Support Network</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Form Modal -->
-    <div id="join-modal" class="fixed inset-0 flex items-center justify-center bg-slate-950/95 backdrop-blur-md opacity-0 invisible transition-all duration-300 px-4" onclick="handleBackdropClick(event)">
-        <div class="modal-content relative w-full max-w-[420px] bg-slate-50 rounded-[2.5rem] overflow-hidden shadow-2xl" onclick="event.stopPropagation()">
-            <div class="bg-gradient-to-r from-blue-700 to-indigo-600 py-10 px-6 text-center text-white relative shadow-lg">
-                <button onclick="toggleModal(false)" class="absolute top-5 right-5 text-white/60 hover:text-white transition p-2 cursor-pointer focus:outline-none" aria-label="Close">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                </button>
-                <span class="text-3xl block mb-2">✨</span>
-                <h3 class="text-2xl font-bold uppercase tracking-tight">Begin Your Journey</h3>
-                <p class="text-white/70 text-[10px] uppercase font-bold tracking-widest mt-1">Submit Your Details below</p>
-            </div>
-
-            <div class="p-8 text-slate-900">
-                <form id="mentorship-form" class="space-y-4 text-left">
-                    <div>
-                        <label class="block text-[9px] font-black text-slate-500 uppercase tracking-[0.2em] mb-2">Full Name *</label>
-                        <input type="text" id="form-name" required placeholder="Enter full name" class="w-full border border-slate-200 rounded-xl px-4 py-3.5 text-sm transition focus:outline-none shadow-sm">
-                    </div>
-                    <div>
-                        <label class="block text-[9px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2">WhatsApp Number *</label>
-                        <input type="tel" id="form-whatsapp" required placeholder="10-digit number" pattern="[0-9]{10}" maxlength="10" class="w-full border border-slate-200 rounded-xl px-4 py-3.5 text-sm transition focus:outline-none shadow-sm">
-                    </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-[9px] font-black text-slate-500 uppercase tracking-[0.2em] mb-2">Age *</label>
-                            <input type="number" id="form-age" required min="13" max="100" placeholder="Years" class="w-full border border-slate-200 rounded-xl px-4 py-3.5 text-sm transition focus:outline-none shadow-sm">
-                        </div>
-                        <div>
-                            <label class="block text-[9px] font-black text-slate-500 uppercase tracking-[0.2em] mb-2">Language *</label>
-                            <select id="form-lang" required class="w-full border border-slate-200 rounded-xl px-4 py-3.5 text-sm transition focus:outline-none shadow-sm">
-                                <option value="" disabled selected>Select</option>
-                                <option value="Hindi">Hindi</option>
-                                <option value="English">English</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-[9px] font-black text-slate-500 uppercase tracking-[0.2em] mb-2">Current Status *</label>
-                        <select id="form-status" required class="w-full border border-slate-200 rounded-xl px-4 py-3.5 text-sm transition focus:outline-none shadow-sm">
-                            <option value="" disabled selected>Choose Status</option>
-                            <option value="Student">Student</option>
-                            <option value="Professional">Professional</option>
-                            <option value="Homemaker">Homemaker</option>
-                            <option value="Entrepreneur">Entrepreneur</option>
-                        </select>
-                    </div>
-                    <button type="submit" id="submit-btn" class="w-full cta-button py-4 rounded-xl text-base flex items-center justify-center gap-3 mt-4 shadow-xl uppercase tracking-wider">
-                        Connect with Golu
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
 
     <!-- Footer -->
-    <footer class="py-16 text-center opacity-40 border-t border-white/5 mx-6">
-        <div class="text-[9px] tracking-[0.6em] font-black uppercase mb-4">Golu Tiwari | Digital Success Strategist</div>
-        <div class="text-[8px] uppercase tracking-[0.3em]">© 2024 All Rights Reserved | Expert Mentorship Program</div>
+    <footer>
+        <p>© 2026 Golu Tiwari. All Rights Reserved.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">DigitalPreneur Affiliate Partner</p>
     </footer>
 
     <script>
-        function toggleModal(show) {
-            const modal = document.getElementById('join-modal');
-            const waIcon = document.getElementById('wa-icon');
-            if(show) {
-                modal.classList.add('active');
-                if(waIcon) { waIcon.style.opacity = '0'; waIcon.style.transform = 'scale(0.5)'; waIcon.style.pointerEvents = 'none'; }
-                document.body.style.overflow = 'hidden';
-            } else {
-                modal.classList.remove('active');
-                if(waIcon) { waIcon.style.opacity = '1'; waIcon.style.transform = 'scale(1)'; waIcon.style.pointerEvents = 'auto'; }
-                document.body.style.overflow = 'auto';
-            }
+        // Generate particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+            particlesContainer.appendChild(particle);
         }
 
-        function handleBackdropClick(e) { if(e.target.id === 'join-modal') toggleModal(false); }
-
-        let targetMx = 0, targetMy = 0, mx = 0, my = 0;
-        const flash = document.getElementById('mouse-flash');
-
-        window.addEventListener('mousemove', (e) => {
-            flash.style.left = e.clientX + 'px'; flash.style.top = e.clientY + 'px'; flash.style.opacity = '1';
-            targetMx = (e.clientX / window.innerWidth - 0.5) * 2;
-            targetMy = -(e.clientY / window.innerHeight - 0.5) * 2;
-        });
-
-        window.addEventListener('mouseleave', () => { flash.style.opacity = '0'; });
-
-        document.getElementById('mentorship-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const btn = document.getElementById('submit-btn');
-            btn.classList.add('btn-loading');
-            const originalText = btn.innerHTML;
-            btn.innerText = 'Connecting...';
-            
-            const data = {
-                name: document.getElementById('form-name').value,
-                phone: document.getElementById('form-whatsapp').value,
-                age: document.getElementById('form-age').value,
-                lang: document.getElementById('form-lang').value,
-                status: document.getElementById('form-status').value
-            };
-
-            const targetPhone = '919236327410';
-            const message = encodeURIComponent(`*New Mentorship Request*\n\n👤 *Name:* ${data.name}\n🎂 *Age:* ${data.age}\n🌐 *Language:* ${data.lang}\n💼 *Status:* ${data.status}\n📱 *WhatsApp:* ${data.phone}\n\nHi Golu, I want to learn more about your digital mentorship program. Please guide me!`);
-            
-            if(typeof fbq === 'function') fbq('track', 'Lead');
-            
-            setTimeout(() => {
-                window.open(`https://wa.me/${targetPhone}?text=${message}`, '_blank');
-                toggleModal(false);
-                btn.classList.remove('btn-loading');
-                btn.innerHTML = originalText;
-                e.target.reset();
-            }, 600);
-        });
-
-        const initThree = () => {
-            const container = document.getElementById('canvas-container');
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-            container.appendChild(renderer.domElement);
-            camera.position.z = 85; 
-
-            const cursorLight = new THREE.PointLight(0x00f2ff, 15, 300);
-            scene.add(cursorLight);
-            const fixedLight = new THREE.PointLight(0x6366f1, 10, 400);
-            fixedLight.position.set(-50, -50, 50);
-            scene.add(fixedLight);
-            scene.add(new THREE.AmbientLight(0xffffff, 0.2));
-
-            const geo = new THREE.SphereGeometry(18, 32, 32);
-            const orbs = [];
-            for(let i=0; i<6; i++) {
-                const mat = new THREE.MeshPhongMaterial({ color: i % 2 === 0 ? 0x6366f1 : 0x00f2ff, transparent: true, opacity: 0.08, shininess: 150 });
-                const mesh = new THREE.Mesh(geo, mat);
-                mesh.position.set((Math.random()-0.5)*180, (Math.random()-0.5)*180, (Math.random()-0.5)*60);
-                mesh.userData.vel = new THREE.Vector3((Math.random()-0.5)*0.04, (Math.random()-0.5)*0.04, (Math.random()-0.5)*0.04);
-                mesh.userData.pulseOffset = Math.random() * Math.PI * 2;
-                orbs.push(mesh); scene.add(mesh);
-            }
-
-            const mouseOrbGeo = new THREE.SphereGeometry(6, 32, 32);
-            const mouseOrbMat = new THREE.MeshPhongMaterial({ color: 0x00f2ff, transparent: true, opacity: 0.3, emissive: 0x00f2ff, emissiveIntensity: 0.5 });
-            const mouseOrb = new THREE.Mesh(mouseOrbGeo, mouseOrbMat);
-            scene.add(mouseOrb);
-
-            const animate = (time) => {
-                requestAnimationFrame(animate);
-                const t = time * 0.001;
-                mx += (targetMx - mx) * 0.1; my += (targetMy - my) * 0.1;
-                cursorLight.position.set(mx * 90, my * 70, 20);
-                mouseOrb.position.set(mx * 110, my * 85, 10);
-                mouseOrb.scale.setScalar(1 + Math.sin(t * 2) * 0.1); 
-                orbs.forEach((s) => {
-                    s.position.add(s.userData.vel);
-                    const scale = 1 + Math.sin(t + s.userData.pulseOffset) * 0.15;
-                    s.scale.set(scale, scale, scale);
-                    if(Math.abs(s.position.x) > 130) s.userData.vel.x *= -1;
-                    if(Math.abs(s.position.y) > 130) s.userData.vel.y *= -1;
-                });
-                camera.position.x += (mx * 12 - camera.position.x) * 0.05;
-                camera.position.y += (my * 12 - camera.position.y) * 0.05;
-                camera.lookAt(0,0,0); renderer.render(scene, camera);
-            };
-
-            window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            });
-            animate(0);
+        // Scroll reveal
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
         };
-        window.addEventListener('load', initThree);
 
-        const updateTimer = () => {
-            const end = new Date().getTime() + (3 * 24 * 60 * 60 * 1000); 
-            const timerInterval = setInterval(() => {
-                const now = new Date().getTime();
-                const diff = end - now;
-                const d=1000*60*60*24, h=1000*60*60, m=1000*60;
-                if(diff <= 0) {
-                    clearInterval(timerInterval);
-                    document.getElementById('days').innerText = "00";
-                    document.getElementById('hours').innerText = "00";
-                    document.getElementById('minutes').innerText = "00";
-                    return;
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
                 }
-                document.getElementById('days').innerText = Math.floor(diff/d).toString().padStart(2,'0');
-                document.getElementById('hours').innerText = Math.floor((diff%d)/h).toString().padStart(2,'0');
-                document.getElementById('minutes').innerText = Math.floor((diff%h)/m).toString().padStart(2,'0');
-            }, 1000);
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Meta Pixel Contact tracking
+        function trackContact() {
+            fbq('track', 'Contact');
+            console.log('Contact event tracked');
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Counter animation
+        const counters = document.querySelectorAll('.stat-number');
+        const speed = 200;
+
+        const animateCounters = () => {
+            counters.forEach(counter => {
+                const target = counter.innerText;
+                const isRupee = target.includes('₹');
+                const isPercent = target.includes('%');
+                const numericPart = target.replace(/[₹,+%L]/g, '');
+                
+                let count = 0;
+                const increment = parseInt(numericPart) / speed;
+                
+                const updateCount = () => {
+                    count += increment;
+                    if (count < parseInt(numericPart)) {
+                        if (isRupee) {
+                            counter.innerText = '₹' + Math.ceil(count).toLocaleString() + (target.includes('L') ? 'L+' : '+');
+                        } else if (isPercent) {
+                            counter.innerText = Math.ceil(count) + '%';
+                        } else {
+                            counter.innerText = Math.ceil(count).toLocaleString() + '+';
+                        }
+                        requestAnimationFrame(updateCount);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCount();
+            });
         };
-        updateTimer();
+
+        // Trigger counter animation when stats section is visible
+        const statsSection = document.querySelector('.stats');
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        statsObserver.observe(statsSection);
     </script>
 </body>
 </html>
