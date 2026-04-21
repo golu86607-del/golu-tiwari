@@ -1598,6 +1598,7 @@
       background: #64748b;
     }
   </style>
+<base target="_blank">
 </head>
 <body>
 
@@ -1984,7 +1985,7 @@
       "Every expert was once a beginner. Your journey to financial independence starts with a single message."
     </p>
     
-    <a href="https://www.instagram.com/golutiwari" target="_blank" class="insta-link">
+    <a href="https://www.instagram.com/golu_tiwariiiii?igsh=MXV0bGJwZmlyMmRsaw==" target="_blank" class="insta-link">
       <i data-lucide="instagram" width="20"></i>
       Follow @golutiwari
     </a>
@@ -2008,4 +2009,321 @@
           Dedicated to empowering individuals across the globe to achieve financial independence through digital skills. Join our movement of unstoppable people creating their own destinies.
         </p>
         <div class="social-icons">
-          <a href="https://wa.me/919236327410" class="social-icon" target="_blank" title="
+          <a href="https://wa.me/919236327410" class="social-icon" target="_blank" WhatsApp">
+            <i data-lucide="message-circle" width="20"></i>
+          </a>
+          <a href="https://www.instagram.com/golu_tiwariiiii?igsh=MXV0bGJwZmlyMmRsaw==" class="social-icon" target="_blank" title="Instagram">
+            <i data-lucide="instagram" width="20"></i>
+          </a>
+          <a href="#" class="social-icon" title="Email">
+            <i data-lucide="mail" width="20"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-3">
+        <h5>Explore</h5>
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About Golu</a></li>
+          <li><a href="#dashboard">Results</a></li>
+          <li><a href="#faq">Common Questions</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-3">
+        <h5>Legal</h5>
+        <ul class="footer-links">
+          <li><a href="#" onclick="openPrivacy();return false;">Privacy Policy</a></li>
+          <li><a href="#" onclick="openPrivacy();return false;">Terms of Service</a></li>
+          <li><a href="#" onclick="openPrivacy();return false;">Disclaimer</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      <p class="mb-0">Crafted with <span>♥</span> by Golu Tiwari | © 2024 All Rights Reserved</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Form Popup Backdrop -->
+<div class="form-backdrop" id="formBackdrop"></div>
+
+<!-- Privacy Policy Modal -->
+<div class="pp-overlay" id="ppOverlay">
+  <div class="pp-modal">
+    <div class="pp-header">
+      <div class="pp-title">Privacy Policy</div>
+      <button class="pp-close" id="ppClose">&times;</button>
+    </div>
+    <div class="pp-body">
+      <h3>Information Collection</h3>
+      <p>When you connect with us, we collect basic information including your name, contact number, age, gender, and professional background. This data helps us understand your needs and provide personalized mentorship.</p>
+
+      <h3>Use of Information</h3>
+      <p>Your information is used exclusively to communicate program details, provide mentorship support, and track your progress. We never share your personal data with unrelated third parties for marketing purposes.</p>
+
+      <h3>Data Security</h3>
+      <p>We implement industry-standard security measures to protect your personal information. Your data is stored securely and accessed only by authorized personnel directly involved in your mentorship.</p>
+
+      <h3>Your Rights</h3>
+      <p>You have the right to request access to, correction of, or deletion of your personal data at any time. Simply reach out via WhatsApp to exercise these rights.</p>
+
+      <div class="pp-footer">By engaging with our services, you acknowledge this privacy policy.</div>
+    </div>
+  </div>
+</div>
+
+<!-- Form Popup -->
+<div id="formContainer">
+  <div class="form-card border-0">
+    <div class="form-header">
+      <h2 class="h4 fw-bold mb-1">✨ Begin Your Journey</h2>
+      <p class="small mb-0">Fill in your details to get started</p>
+    </div>
+    <div class="card-body p-4 position-relative">
+      <button id="closeFormBtn" class="btn-close position-absolute" style="top: 15px; right: 15px;" aria-label="Close"></button>
+
+      <form id="mainForm" novalidate>
+        <input type="hidden" id="sourceInfo" name="sourceInfo">
+        <div class="row g-3">
+          <div class="col-12">
+            <label class="form-label">Full Name *</label>
+            <input id="inp_name" type="text" class="form-control" required placeholder="Enter your full name">
+          </div>
+          <div class="col-12">
+            <label class="form-label">Contact Number *</label>
+            <input id="inp_phone" type="tel" class="form-control" required placeholder="10-digit mobile number" maxlength="10">
+          </div>
+          <div class="col-6">
+            <label class="form-label">Age *</label>
+            <input id="inp_age" type="number" class="form-control" required min="15" max="65" placeholder="Your age">
+          </div>
+          <div class="col-6">
+            <label class="form-label">Gender *</label>
+            <select id="inp_gender" class="form-select" required>
+              <option value="">Select</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="col-12">
+            <label class="form-label">Profession *</label>
+            <select id="inp_profession" class="form-select" required>
+              <option value="">Select your profession</option>
+              <option>College Student</option>
+              <option>Working Professional</option>
+              <option>Homemaker</option>
+              <option>Entrepreneur</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="col-12">
+            <button type="submit" class="btn-submit">
+              <i data-lucide="send" style="width:18px;vertical-align:middle;margin-right:8px;"></i>
+              Send & Connect on WhatsApp
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+lucide.createIcons();
+
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz044nPSDdmX7I4VkylzJwgO__TQcGu7T-4NfFHPdYlwaAxiisBI9GaWdX-rEWbTxUXiw/exec";
+
+function updateCountdown() {
+  const now = new Date();
+  const nextMonday = new Date();
+  nextMonday.setDate(now.getDate() + (1 + 7 - now.getDay()) % 7);
+  nextMonday.setHours(0, 0, 0, 0);
+
+  if (now.getDay() === 1) {
+    nextMonday.setDate(now.getDate() + 7);
+  }
+
+  const diff = nextMonday - now;
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+  document.getElementById('days').textContent = String(days).padStart(2, '0');
+  document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+  document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+  document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+window.addEventListener('scroll',function(){
+  const navbar=document.querySelector('.navbar');
+  if(window.scrollY>50){
+    navbar.classList.add('scrolled');
+  }else{
+    navbar.classList.remove('scrolled');
+  }
+});
+
+const counters=document.querySelectorAll('.counter');
+const counterObserver=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting&&!entry.target.classList.contains('counted')){
+      entry.target.classList.add('counted');
+      const target=+entry.target.getAttribute('data-target');
+      const suffix=entry.target.getAttribute('data-suffix')||'';
+      let current=0;
+      const inc=Math.max(1,Math.floor(target/50));
+      const timer=setInterval(()=>{
+        current+=inc;
+        if(current>=target){current=target;clearInterval(timer);}
+        entry.target.textContent=current.toLocaleString()+suffix;
+      },30);
+    }
+  });
+},{threshold:0.3});
+counters.forEach(counter=>counterObserver.observe(counter));
+
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.animate-fade-up, .animate-slide-left, .animate-slide-right').forEach(el => {
+  observer.observe(el);
+});
+
+const formBackdrop=document.getElementById('formBackdrop');
+const formContainer=document.getElementById('formContainer');
+const mainForm=document.getElementById('mainForm');
+const sourceInfo=document.getElementById('sourceInfo');
+const closeFormBtn=document.getElementById('closeFormBtn');
+const ppOverlay=document.getElementById('ppOverlay');
+const ppClose=document.getElementById('ppClose');
+const privacyBtn=document.getElementById('privacyBtn');
+
+const WA_NUMBER_INT="919236327410";
+
+function openForm(source='Website'){
+  sourceInfo.value=source;
+  formBackdrop.classList.add('show');
+  formContainer.classList.add('show');
+  document.body.style.overflow='hidden';
+}
+
+function closeForm(){
+  formBackdrop.classList.remove('show');
+  formContainer.classList.remove('show');
+  document.body.style.overflow='';
+  setTimeout(()=>mainForm.reset(),300);
+}
+
+function openPrivacy(){
+  ppOverlay.classList.add('show');
+  document.body.style.overflow='hidden';
+}
+
+function closePrivacy(){
+  ppOverlay.classList.remove('show');
+  document.body.style.overflow='';
+}
+
+formBackdrop.addEventListener('click',closeForm);
+closeFormBtn.addEventListener('click',closeForm);
+privacyBtn.addEventListener('click',openPrivacy);
+ppClose.addEventListener('click',closePrivacy);
+ppOverlay.addEventListener('click',function(e){if(e.target===ppOverlay)closePrivacy();});
+
+document.addEventListener('click',e=>{
+  const trigger=e.target.closest('.open-any');
+  if(trigger&&!trigger.closest('#formContainer')){
+    e.preventDefault();
+    openForm(trigger.getAttribute('data-source')||'Website');
+  }
+});
+
+/* ---- FORM SUBMIT ---- */
+mainForm.addEventListener('submit',function(e){
+  e.preventDefault();
+
+  const name=document.getElementById('inp_name').value.trim();
+  const phone=document.getElementById('inp_phone').value.replace(/\D/g,'');
+  const age=document.getElementById('inp_age').value;
+  const gender=document.getElementById('inp_gender').value;
+  const profession=document.getElementById('inp_profession').value;
+  const source=sourceInfo.value || 'Website';
+
+  if(!name||phone.length<10||!age||!gender||!profession){
+    alert('Please fill all fields correctly with a valid 10-digit phone number.');
+    return;
+  }
+
+  // Google Sheet data
+  const formData = new FormData();
+  formData.append('name', name);
+  formData.append('phone', phone);
+  formData.append('age', age);
+  formData.append('gender', gender);
+  formData.append('profession', profession);
+  formData.append('source', source);
+  formData.append('timestamp', new Date().toISOString());
+
+  // Send to Google Sheets (fire and forget)
+  fetch(SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    body: formData
+  }).catch((error) => {
+    console.error('Sheet error:', error);
+  });
+
+  // Meta Pixel - Contact Event
+  if(typeof fbq !== 'undefined'){
+    fbq('track', 'Contact');
+  }
+
+  // WhatsApp redirect
+  const message = encodeURIComponent(
+    `Hello Golu! 👋\n\nI'm interested in your digital mentorship program. Here are my details:\n\n📝 Name: ${name}\n📱 Phone: ${phone}\n🎂 Age: ${age}\n👤 Gender: ${gender}\n💼 Profession: ${profession}\n\nI'm excited to start my journey. Please share the next steps!\n\nThank you! ✨`
+  );
+
+  window.open(`https://wa.me/${WA_NUMBER_INT}?text=${message}`, '_blank');
+
+  closeForm();
+});
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
+  anchor.addEventListener('click',function(e){
+    e.preventDefault();
+    const target=document.querySelector(this.getAttribute('href'));
+    if(target){
+      target.scrollIntoView({behavior:'smooth',block:'start'});
+    }
+  });
+});
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    closeForm();
+    closePrivacy();
+  }
+});
+</script>
+</body>
+</html>
