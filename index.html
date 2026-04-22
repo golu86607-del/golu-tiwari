@@ -1664,6 +1664,7 @@
   </style>
 <base target="_blank">
 <base target="_blank">
+<base target="_blank">
 </head>
 <body>
 
@@ -2205,7 +2206,7 @@
 <script>
 lucide.createIcons();
 
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz044nPSDdmX7I4VkylzJwgO__TQcGu7T-4NfFHPdYlwaAxiisBI9GaWdX-rEWbTxUXiw/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzUxJL_1QH-cer2wQOfNstp5wKQxgXJdCmbbjWRSWkZ7SQjhhqEiojYzBCBVRXJYzX2/exec";
 
 function updateCountdown() {
   const now = new Date();
@@ -2344,21 +2345,32 @@ mainForm.addEventListener('submit',function(e){
     return;
   }
 
-  // Google Sheet data
-  const formData = new FormData();
-  formData.append('name', name);
-  formData.append('phone', phone);
-  formData.append('age', age);
-  formData.append('gender', gender);
-  formData.append('profession', profession);
-  formData.append('source', source);
-  formData.append('timestamp', new Date().toISOString());
+  // Show loading state
+  const submitBtn = mainForm.querySelector('.btn-submit');
+  const originalBtnText = submitBtn.innerHTML;
+  submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Sending...';
+  submitBtn.disabled = true;
 
-  // Send to Google Sheets (fire and forget)
+  // Prepare data for Google Sheet (URLSearchParams format)
+  const sheetData = new URLSearchParams();
+  sheetData.append('name', name);
+  sheetData.append('phone', phone);
+  sheetData.append('age', age);
+  sheetData.append('gender', gender);
+  sheetData.append('profession', profession);
+  sheetData.append('source', source);
+  sheetData.append('timestamp', new Date().toISOString());
+
+  // Send to Google Sheets FIRST
   fetch(SCRIPT_URL, {
     method: 'POST',
     mode: 'no-cors',
-    body: formData
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: sheetData.toString()
+  }).then(() => {
+    console.log('Data saved to Google Sheet');
   }).catch((error) => {
     console.error('Sheet error:', error);
   });
@@ -2368,13 +2380,18 @@ mainForm.addEventListener('submit',function(e){
     fbq('track', 'Contact');
   }
 
-  // WhatsApp redirect
-  const message = encodeURIComponent(
-    `Hello Golu! 👋\n\nI'm interested in your digital mentorship program. Here are my details:\n\n📝 Name: ${name}\n📱 Phone: ${phone}\n🎂 Age: ${age}\n👤 Gender: ${gender}\n💼 Profession: ${profession}\n\nI'm excited to start my journey. Please share the next steps!\n\nThank you! ✨`
-  );
+  // WhatsApp message with ALL details
+  const waMessage = `Hello Golu! 👋\n\nI'm interested in your digital mentorship program.\n\nHere are my details:\n\n📝 Name: ${name}\n📱 Phone: ${phone}\n🎂 Age: ${age}\n👤 Gender: ${gender}\n💼 Profession: ${profession}\n📍 Source: ${source}\n\nI'm excited to start my journey. Please share the next steps!\n\nThank you! ✨`;
 
-  window.open(`https://wa.me/${WA_NUMBER_INT}?text=${message}`, '_blank');
+  const encodedMessage = encodeURIComponent(waMessage);
+  const waUrl = `https://wa.me/${WA_NUMBER_INT}?text=${encodedMessage}`;
 
+  // Reset button
+  submitBtn.innerHTML = originalBtnText;
+  submitBtn.disabled = false;
+
+  // Open WhatsApp with all details
+  window.open(waUrl, '_blank');
   closeForm();
 });
 
