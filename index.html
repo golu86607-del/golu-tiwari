@@ -30,6 +30,25 @@
   <noscript><img height="1" width="1" style="display:none"
   src="https://www.facebook.com/tr?id=1452191529939930&ev=PageView&noscript=1"/></noscript>
 
+<!-- Snap Pixel Code -->
+<script type='text/javascript'>
+(function(e,t,n){if(e.snaptr)return;var a=e.snaptr=function()
+{a.handleRequest?a.handleRequest.apply(a,arguments):a.queue.push(arguments)};
+a.queue=[];var s='script';r=t.createElement(s);r.async=!0;
+r.src=n;var u=t.getElementsByTagName(s)[0];
+u.parentNode.insertBefore(r,u);})(window,document,
+'https://sc-static.net/scevent.min.js');
+
+snaptr('init', 'cec10e74-cd7a-4440-a9f9-ce9ad36b7128', {
+'user_email': '__INSERT_USER_EMAIL__'
+});
+
+snaptr('track', 'PAGE_VIEW');
+
+</script>
+<!-- End Snap Pixel Code -->
+
+
   <style>
     :root{
       --primary-blue: #2563eb;
@@ -270,6 +289,7 @@
       .animate-float{animation:none!important;}
     }
   </style>
+<base target="_blank">
 <base target="_blank">
 </head>
 <body>
@@ -670,7 +690,7 @@ lucide.createIcons();
 
 // Google Apps Script URL
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzyf33uxS_xAOUYQTTAswPnuP81NdM9Wo4yU1J4j_fgPwIxCTTY9S1mZ6B6hWwZNxw3/exec";
-const WA_NUMBER = "919354066114";
+const WA_NUMBER = "917250478215";
 
 // Form elements
 const formBackdrop = document.getElementById('formBackdrop');
@@ -777,6 +797,9 @@ mainForm.addEventListener('submit', function(e) {
   if (typeof fbq !== 'undefined') {
     fbq('track', 'Lead');
     fbq('track', 'Contact');
+  }
+  if (typeof snaptr !== 'undefined') {
+    snaptr('track', 'SIGN_UP');
   }
 
   // Build WhatsApp message
