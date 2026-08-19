@@ -714,34 +714,29 @@ window.addEventListener('scroll', function() {
   }
 });
 
-// Open form popup
-function openForm(source) {
-  sourceInfo.value = source || 'Website';
-  formBackdrop.classList.add('show');
-  formContainer.classList.add('show');
-  document.body.style.overflow = 'hidden';
-}
-
-// Close form popup
-function closeForm() {
-  formBackdrop.classList.remove('show');
-  formContainer.classList.remove('show');
-  document.body.style.overflow = '';
-  setTimeout(() => mainForm.reset(), 300);
+// Directly open WhatsApp with fixed message (no form)
+function openWhatsAppDirect(source) {
+  if (typeof fbq !== 'undefined') {
+    fbq('track', 'Lead');
+    fbq('track', 'Contact');
+  }
+  if (typeof snaptr !== 'undefined') {
+    snaptr('track', 'SIGN_UP');
+  }
+  const message = encodeURIComponent(
+    `Hi Golu, I want to learn more about your digital mentorship program. Please guide me!!`
+  );
+  window.open(`https://wa.me/${WA_NUMBER}?text=${message}`, '_blank');
 }
 
 // Event delegation for all open-any buttons
 document.addEventListener('click', function(e) {
   const trigger = e.target.closest('.open-any');
-  if (trigger && !trigger.closest('#formContainer')) {
+  if (trigger) {
     e.preventDefault();
-    openForm(trigger.getAttribute('data-source') || 'Website');
+    openWhatsAppDirect(trigger.getAttribute('data-source') || 'Website');
   }
 });
-
-// Close form on backdrop click
-formBackdrop.addEventListener('click', closeForm);
-closeFormBtn.addEventListener('click', closeForm);
 
 // Privacy modal functions
 function openPrivacy() {
@@ -760,68 +755,9 @@ ppOverlay.addEventListener('click', function(e) {
 });
 privacyBtn.addEventListener('click', openPrivacy);
 
-// Form submission
-mainForm.addEventListener('submit', function(e) {
-  e.preventDefault();
-
-  const name = document.getElementById('inp_name').value.trim();
-  const phone = document.getElementById('inp_phone').value.replace(/\D/g, '');
-  const age = document.getElementById('inp_age').value;
-  const gender = document.getElementById('inp_gender').value;
-  const profession = document.getElementById('inp_profession').value;
-
-  // Simple validation
-  if (!name || phone.length < 10 || !age || !gender || !profession) {
-    alert('Please fill all fields correctly. Phone must be 10 digits.');
-    return;
-  }
-
-  // Build FormData for Google Sheets
-  const formData = new FormData();
-  formData.append('name', name);
-  formData.append('phone', phone);
-  formData.append('age', age);
-  formData.append('gender', gender);
-  formData.append('profession', profession);
-  formData.append('source', sourceInfo.value || 'Website');
-  formData.append('timestamp', new Date().toISOString());
-
-  // Send to Google Sheets
-  fetch(SCRIPT_URL, {
-    method: 'POST',
-    body: formData,
-    mode: 'no-cors'
-  }).catch(err => console.log('Sheet error:', err));
-
-  // Track both Lead and Contact events (one time each)
-  if (typeof fbq !== 'undefined') {
-    fbq('track', 'Lead');
-    fbq('track', 'Contact');
-  }
-  if (typeof snaptr !== 'undefined') {
-    snaptr('track', 'SIGN_UP');
-  }
-
-  // Build WhatsApp message
-  const message = encodeURIComponent(
-    `*New Mentorship Request*\n\n` +
-    `👤 *Name:* ${name}\n` +
-    `🎂 *Age:* ${age}\n` +
-    `🌐 *Gender:* ${gender}\n` +
-    `💼 *Profession:* ${profession}\n` +
-    `📱 *Phone:* ${phone}\n\n` +
-    `Hi Golu, I want to learn more about your digital mentorship program. Please guide me!!`
-  );
-
-  // Open WhatsApp in _blank
-  window.open(`https://wa.me/${WA_NUMBER}?text=${message}`, '_blank');
-  closeForm();
-});
-
 // Close on Escape key
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') {
-    closeForm();
     closePrivacy();
   }
 });
