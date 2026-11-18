@@ -722,7 +722,6 @@ window.addEventListener('scroll', function() {
 // Directly open WhatsApp with fixed message (no form)
 function openWhatsAppDirect(source) {
   if (typeof fbq !== 'undefined') {
-    fbq('track', 'Lead');
     fbq('track', 'Contact');
   }
   if (typeof snaptr !== 'undefined') {
@@ -777,7 +776,6 @@ mainForm.addEventListener('submit', function(e) {
   }
 
   if (typeof fbq !== 'undefined') {
-    fbq('track', 'Lead');
     fbq('track', 'Contact');
   }
   if (typeof snaptr !== 'undefined') {
