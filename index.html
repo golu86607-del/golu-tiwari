@@ -648,6 +648,10 @@ snaptr('track', 'PAGE_VIEW');
             <label class="form-label">Full Name *</label>
             <input id="inp_name" type="text" class="form-control" required placeholder="Enter your full name">
           </div>
+          <div class="col-12">
+            <label class="form-label">Contact Number *</label>
+            <input id="inp_phone" type="tel" class="form-control" required placeholder="10-digit mobile number" maxlength="10">
+          </div>
           <div class="col-6">
             <label class="form-label">Age *</label>
             <input id="inp_age" type="number" class="form-control" required min="15" max="65" placeholder="Your age">
@@ -662,8 +666,15 @@ snaptr('track', 'PAGE_VIEW');
             </select>
           </div>
           <div class="col-12">
-            <label class="form-label">Job Title *</label>
-            <input id="inp_job" type="text" class="form-control" required placeholder="e.g. Student, Teacher, Shop Owner">
+            <label class="form-label">Profession *</label>
+            <select id="inp_profession" class="form-select" required>
+              <option value="">Select your profession</option>
+              <option>College Student</option>
+              <option>Working Professional</option>
+              <option>Homemaker</option>
+              <option>Entrepreneur</option>
+              <option>Other</option>
+            </select>
           </div>
           <div class="col-12">
             <button type="submit" class="btn-submit">
@@ -751,12 +762,17 @@ document.addEventListener('click', function(e) {
 mainForm.addEventListener('submit', function(e) {
   e.preventDefault();
   const name = document.getElementById('inp_name').value.trim();
+  const phone = document.getElementById('inp_phone').value.trim();
   const age = document.getElementById('inp_age').value.trim();
   const gender = document.getElementById('inp_gender').value;
-  const job = document.getElementById('inp_job').value.trim();
+  const profession = document.getElementById('inp_profession').value;
 
-  if (!name || !age || !gender || !job) {
+  if (!name || !phone || !age || !gender || !profession) {
     alert('Please fill all the details.');
+    return;
+  }
+  if (!/^[6-9]\d{9}$/.test(phone)) {
+    alert('Please enter a valid 10-digit mobile number.');
     return;
   }
 
@@ -769,13 +785,13 @@ mainForm.addEventListener('submit', function(e) {
   }
 
   const data = new URLSearchParams({
-    name: name, age: age, gender: gender, job: job,
-    source: sourceInfo.value, time: new Date().toLocaleString()
+    name: name, phone: phone, age: age, gender: gender,
+    profession: profession, source: sourceInfo.value || 'Website'
   });
   fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: data }).catch(() => {});
 
   const message = encodeURIComponent(
-    `Hi Golu, I want to learn more about your digital mentorship program.\n\nName: ${name}\nAge: ${age}\nGender: ${gender}\nJob Title: ${job}`
+    `Hi Golu, I want to learn more about your digital mentorship program.\n\nName: ${name}\nPhone: ${phone}\nAge: ${age}\nGender: ${gender}\nProfession: ${profession}`
   );
   window.open(`https://wa.me/${WA_NUMBER}?text=${message}`, '_blank');
 
