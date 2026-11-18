@@ -558,9 +558,9 @@ snaptr('track', 'PAGE_VIEW');
       </button>
     </div>
     <p class="small mb-3" style="color:var(--text-secondary);font-style:italic;">"Every expert was once a beginner. Your journey to financial independence starts with a single message."</p>
-    <a href="https://www.instagram.com/golu_tiwariiiii?igsh=MXV0bGJwZmlyMmRsaw==" target="_blank" class="insta-link">
+    <a href="https://www.instagram.com/golu_tii?fqnt=YjNjYm1sc20wOWdx" target="_blank" class="insta-link">
       <i data-lucide="instagram" width="20"></i>
-      Follow @golutiwari
+      Follow @golu_tii
     </a>
     <div class="mt-4">
       <button class="btn btn-outline-secondary btn-sm" id="privacyBtn" style="font-size:0.8rem;border-color:#e2e8f0;color:var(--text-secondary);padding:8px 20px;border-radius:20px;">
@@ -580,7 +580,7 @@ snaptr('track', 'PAGE_VIEW');
         <p class="footer-text">Dedicated to empowering individuals across the globe to achieve financial independence through digital skills. Join our movement of unstoppable people creating their own destinies.</p>
         <div class="social-icons">
           <a href="https://wa.me/919236327410" class="social-icon" target="_blank" title="WhatsApp"><i data-lucide="message-circle" width="20"></i></a>
-          <a href="https://www.instagram.com/golu_tiwariiiii" class="social-icon" target="_blank" title="Instagram"><i data-lucide="instagram" width="20"></i></a>
+          <a href="https://www.instagram.com/golu_tii?fqnt=YjNjYm1sc20wOWdx" class="social-icon" target="_blank" title="Instagram"><i data-lucide="instagram" width="20"></i></a>
           <a href="#" class="social-icon" title="Email"><i data-lucide="mail" width="20"></i></a>
         </div>
       </div>
@@ -648,10 +648,6 @@ snaptr('track', 'PAGE_VIEW');
             <label class="form-label">Full Name *</label>
             <input id="inp_name" type="text" class="form-control" required placeholder="Enter your full name">
           </div>
-          <div class="col-12">
-            <label class="form-label">Contact Number *</label>
-            <input id="inp_phone" type="tel" class="form-control" required placeholder="10-digit mobile number" maxlength="10">
-          </div>
           <div class="col-6">
             <label class="form-label">Age *</label>
             <input id="inp_age" type="number" class="form-control" required min="15" max="65" placeholder="Your age">
@@ -666,15 +662,8 @@ snaptr('track', 'PAGE_VIEW');
             </select>
           </div>
           <div class="col-12">
-            <label class="form-label">Profession *</label>
-            <select id="inp_profession" class="form-select" required>
-              <option value="">Select your profession</option>
-              <option>College Student</option>
-              <option>Working Professional</option>
-              <option>Homemaker</option>
-              <option>Entrepreneur</option>
-              <option>Other</option>
-            </select>
+            <label class="form-label">Job Title *</label>
+            <input id="inp_job" type="text" class="form-control" required placeholder="e.g. Student, Teacher, Shop Owner">
           </div>
           <div class="col-12">
             <button type="submit" class="btn-submit">
@@ -734,13 +723,64 @@ function openWhatsAppDirect(source) {
   window.open(`https://wa.me/${WA_NUMBER}?text=${message}`, '_blank');
 }
 
-// Event delegation for all open-any buttons
+// Form popup open/close
+function openForm(source) {
+  sourceInfo.value = source;
+  formBackdrop.classList.add('show');
+  formContainer.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeForm() {
+  formBackdrop.classList.remove('show');
+  formContainer.classList.remove('show');
+  document.body.style.overflow = '';
+}
+closeFormBtn.addEventListener('click', closeForm);
+formBackdrop.addEventListener('click', closeForm);
+
+// Event delegation for all open-any buttons -> open form
 document.addEventListener('click', function(e) {
   const trigger = e.target.closest('.open-any');
   if (trigger) {
     e.preventDefault();
-    openWhatsAppDirect(trigger.getAttribute('data-source') || 'Website');
+    openForm(trigger.getAttribute('data-source') || 'Website');
   }
+});
+
+// Form submit -> save to sheet + open WhatsApp with details
+mainForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const name = document.getElementById('inp_name').value.trim();
+  const age = document.getElementById('inp_age').value.trim();
+  const gender = document.getElementById('inp_gender').value;
+  const job = document.getElementById('inp_job').value.trim();
+
+  if (!name || !age || !gender || !job) {
+    alert('Please fill all the details.');
+    return;
+  }
+
+  if (typeof fbq !== 'undefined') {
+    fbq('track', 'Lead');
+    fbq('track', 'Contact');
+  }
+  if (typeof snaptr !== 'undefined') {
+    snaptr('track', 'SIGN_UP');
+  }
+
+  const data = new URLSearchParams({
+    name: name, age: age, gender: gender, job: job,
+    source: sourceInfo.value, time: new Date().toLocaleString()
+  });
+  fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: data }).catch(() => {});
+
+  const message = encodeURIComponent(
+    `Hi Golu, I want to learn more about your digital mentorship program.\n\nName: ${name}\nAge: ${age}\nGender: ${gender}\nJob Title: ${job}`
+  );
+  window.open(`https://wa.me/${WA_NUMBER}?text=${message}`, '_blank');
+
+  mainForm.reset();
+  closeForm();
 });
 
 // Privacy modal functions
@@ -764,6 +804,7 @@ privacyBtn.addEventListener('click', openPrivacy);
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') {
     closePrivacy();
+    closeForm();
   }
 });
 
